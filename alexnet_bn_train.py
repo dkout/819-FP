@@ -8,7 +8,7 @@ from DataLoaderAug import *
 
 # Dataset Parameters
 
-batch_size = 16
+batch_size = 64
 load_size = 256
 fine_size = 224
 c = 1
@@ -21,7 +21,7 @@ training_iters = 50000
 step_display = 50
 step_save = 10000
 path_save = './alexnet_bn'
-endtime = datetime.datetime.now()+datetime.timedelta(hours=13)
+endtime = datetime.datetime.now()+datetime.timedelta(hours=24)
 start_from = ''
 
 def batch_norm_layer(x, train_phase, scope_bn):
@@ -135,7 +135,7 @@ train_optimizer = tf.train.AdamOptimizer(learning_rate=learning_rate).minimize(l
 
 # Evaluate model
 accuracy1 = tf.reduce_mean(tf.cast(tf.nn.in_top_k(logits, y, 1), tf.float32))
-accuracy5 = tf.reduce_mean(tf.cast(tf.nn.in_top_k(logits, y, 5), tf.float32))
+#accuracy5 = tf.reduce_mean(tf.cast(tf.nn.in_top_k(logits, y, 5), tf.float32))
 
 # define initialization
 init = tf.global_variables_initializer()
