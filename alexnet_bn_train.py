@@ -8,7 +8,7 @@ from DataLoaderAug import *
 
 # Dataset Parameters
 
-batch_size = 64
+batch_size = 100
 load_size = 256
 fine_size = 224
 c = 1
@@ -19,7 +19,7 @@ learning_rate = 0.0005
 dropout = 0.6 # Dropout, probability to keep units
 training_iters = 50000
 step_display = 50
-step_save = 10000
+step_save = 5000
 path_save = './alexnet_bn'
 endtime = datetime.datetime.now()+datetime.timedelta(hours=24)
 start_from = ''
@@ -42,11 +42,11 @@ def alexnet(x, keep_dropout, train_phase):
 
         'wf6': tf.Variable(tf.random_normal([7*7*256, 4096], stddev=np.sqrt(2./(7*7*256)))),
         'wf7': tf.Variable(tf.random_normal([4096, 4096], stddev=np.sqrt(2./4096))),
-        'wo': tf.Variable(tf.random_normal([4096, 62], stddev=np.sqrt(2./4096)))
+        'wo': tf.Variable(tf.random_normal([4096, 63], stddev=np.sqrt(2./4096)))
     }
 
     biases = {
-        'bo': tf.Variable(tf.ones(62))
+        'bo': tf.Variable(tf.ones(63))
     }
 
     # Conv + ReLU + Pool, 224->55->27
@@ -159,7 +159,7 @@ with tf.Session() as sess:
     while datetime.datetime.now() < endtime:
         # Load a batch of training data
         images_batch, labels_batch = loader_train.next_batch(batch_size)
-        print(labels_batch)
+        
         if step % step_display == 0:
             print('[%s]:' %(datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")))
 
