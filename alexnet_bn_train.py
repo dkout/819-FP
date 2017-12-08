@@ -135,7 +135,7 @@ train_optimizer = tf.train.AdamOptimizer(learning_rate=learning_rate).minimize(l
 
 # Evaluate model
 accuracy1 = tf.reduce_mean(tf.cast(tf.nn.in_top_k(logits, y, 1), tf.float32))
-#accuracy5 = tf.reduce_mean(tf.cast(tf.nn.in_top_k(logits, y, 5), tf.float32))
+accuracy5 = tf.reduce_mean(tf.cast(tf.nn.in_top_k(logits, y, 5), tf.float32))
 
 # define initialization
 init = tf.global_variables_initializer()
@@ -159,7 +159,7 @@ with tf.Session() as sess:
     while datetime.datetime.now() < endtime:
         # Load a batch of training data
         images_batch, labels_batch = loader_train.next_batch(batch_size)
-        
+        print(labels_batch)
         if step % step_display == 0:
             print('[%s]:' %(datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")))
 
