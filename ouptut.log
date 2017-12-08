@@ -1,0 +1,6 @@
+# Images found: 53517
+# Images found: 9475
+[2017-12-08 19:33:03]:
+-Iter 0, Training Loss= 4.425045, Accuracy Top1 = 0.0156, Top5 = 0.0938
+-Iter 0, Validation Loss= 4.355990, Accuracy Top1 = 0.0000, Top5 = 0.0781
+[2017-12-08 19:33:29]:

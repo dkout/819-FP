@@ -4,7 +4,7 @@ import tensorflow as tf
 import sys
 import datetime
 from tensorflow.contrib.layers.python.layers import batch_norm
-from DataLoaderAug import *
+from DataLoaderAug_og import *
 
 # Dataset Parameters
 
