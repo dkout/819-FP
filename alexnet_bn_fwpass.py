@@ -8,7 +8,7 @@ from TrainDataLoader import *
 
 #Restore parameters
 
-restore_path = "4thrun_kout/alexnet_bn-30000"
+restore_path = "run1/alexnet_bn-125000"
 # Dataset Parameters
 batch_size = 1
 load_size = 256 
@@ -98,6 +98,7 @@ def alexnet(x, keep_dropout, train_phase):
     return out
 
 # Construct dataloader
+'''
 opt_data_train = {
     #'data_h5': 'miniplaces_256_train.h5',
     'data_root': '../../../data/images/train',   # MODIFY PATH ACCORDINGLY
@@ -116,19 +117,19 @@ opt_data_val = {
     'data_mean': data_mean,
     'randomize': False
     }
-
+'''
 opt_data_test = {
     #'data_h5': 'miniplaces_256_val.h5',
     'data_root': '../letters',   # MODIFY PATH ACCORDINGLY
-    'data_list': './test.txt',   # MODIFY PATH ACCORDINGLY
+    'data_list': './test_data.txt',   # MODIFY PATH ACCORDINGLY
     'load_size': load_size,
     'fine_size': fine_size,
     'data_mean': data_mean,
     'randomize': False
     }
 
-loader_train = DataLoaderDisk(**opt_data_train)
-loader_val = DataLoaderDisk(**opt_data_val)
+#loader_train = DataLoaderDisk(**opt_data_train)
+#loader_val = DataLoaderDisk(**opt_data_val)
 loader_test = DataLoaderDisk(**opt_data_test)
 #loader_train = DataLoaderH5(**opt_data_train)
 #loader_val = DataLoaderH5(**opt_data_val)
