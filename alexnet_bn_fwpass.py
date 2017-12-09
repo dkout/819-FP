@@ -120,8 +120,8 @@ opt_data_val = {
 '''
 opt_data_test = {
     #'data_h5': 'miniplaces_256_val.h5',
-    'data_root': '.' #'../letters',   # MODIFY PATH ACCORDINGLY
-    'data_list': 'validation.txt' #'./test_data.txt',   # MODIFY PATH ACCORDINGLY
+    'data_root': '.', #'../letters',   # MODIFY PATH ACCORDINGLY
+    'data_list': 'validation.txt', #'./test_data.txt',   # MODIFY PATH ACCORDINGLY
     'load_size': load_size,
     'fine_size': fine_size,
     'data_mean': data_mean,

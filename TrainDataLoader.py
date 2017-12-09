@@ -20,7 +20,7 @@ class DataLoaderDisk(object):
         self.name_list = []
         with open(kwargs['data_list'], 'r') as f:
             for line in f:
-                path =line[:-1]
+                path =line.split(' ')#[:-1]
                 self.list_im.append(os.path.join(self.data_root, path))
                 self.name_list.append(path)
         self.list_im = np.array(self.list_im, np.object)
