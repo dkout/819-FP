@@ -1,0 +1,6 @@
+model_checkpoint_path: "alexnet_bn-125000"
+all_model_checkpoint_paths: "alexnet_bn-105000"
+all_model_checkpoint_paths: "alexnet_bn-110000"
+all_model_checkpoint_paths: "alexnet_bn-115000"
+all_model_checkpoint_paths: "alexnet_bn-120000"
+all_model_checkpoint_paths: "alexnet_bn-125000"
