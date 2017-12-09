@@ -13,8 +13,8 @@ restore_path = "4thrun_kout/alexnet_bn-30000"
 batch_size = 1
 load_size = 256 
 fine_size = 224
-c = 3
-data_mean = np.asarray([0.45834960097,0.44674252445,0.41352266842])
+c = 1
+data_mean = np.asarray([1])
 
 # Training Parameters
 learning_rate = 0.0005
@@ -36,7 +36,7 @@ def batch_norm_layer(x, train_phase, scope_bn):
     
 def alexnet(x, keep_dropout, train_phase):
     weights = {
-        'wc1': tf.Variable(tf.random_normal([11, 11, 3, 96], stddev=np.sqrt(2./(11*11*3)))),
+        'wc1': tf.Variable(tf.random_normal([11, 11, 1, 96], stddev=np.sqrt(2./(11*11*3)))),
         'wc2': tf.Variable(tf.random_normal([5, 5, 96, 256], stddev=np.sqrt(2./(5*5*96)))),
         'wc3': tf.Variable(tf.random_normal([3, 3, 256, 384], stddev=np.sqrt(2./(3*3*256)))),
         'wc4': tf.Variable(tf.random_normal([3, 3, 384, 256], stddev=np.sqrt(2./(3*3*384)))),
@@ -44,11 +44,11 @@ def alexnet(x, keep_dropout, train_phase):
 
         'wf6': tf.Variable(tf.random_normal([7*7*256, 4096], stddev=np.sqrt(2./(7*7*256)))),
         'wf7': tf.Variable(tf.random_normal([4096, 4096], stddev=np.sqrt(2./4096))),
-        'wo': tf.Variable(tf.random_normal([4096, 100], stddev=np.sqrt(2./4096)))
+        'wo': tf.Variable(tf.random_normal([4096, 63], stddev=np.sqrt(2./4096)))
     }
 
     biases = {
-        'bo': tf.Variable(tf.ones(100))
+        'bo': tf.Variable(tf.ones(63))
     }
 
     # Conv + ReLU + Pool, 224->55->27
@@ -120,7 +120,7 @@ opt_data_val = {
 opt_data_test = {
     #'data_h5': 'miniplaces_256_val.h5',
     'data_root': '../letters',   # MODIFY PATH ACCORDINGLY
-    'data_list': '../letters/test.txt',   # MODIFY PATH ACCORDINGLY
+    'data_list': './test.txt',   # MODIFY PATH ACCORDINGLY
     'load_size': load_size,
     'fine_size': fine_size,
     'data_mean': data_mean,
@@ -134,13 +134,13 @@ loader_test = DataLoaderDisk(**opt_data_test)
 #loader_val = DataLoaderH5(**opt_data_val)
 
 # tf Graph input
-x = tf.placeholder(tf.float32, [None, fine_size, fine_size, c])
+x = tf.placeholder(tf.float32, [None, fine_size, fine_size])
 #y = tf.placeholder(tf.int64, None)
 keep_dropout = tf.placeholder(tf.float32)
 train_phase = tf.placeholder(tf.bool)
 
 # Construct model
-logits = alexnet(x, keep_dropout, train_phase)
+logits = alexnet(tf.reshape(x, [-1, fine_size, fine_size, 1]), keep_dropout, train_phase)
 
 probabilities = tf.nn.softmax(logits)
 
