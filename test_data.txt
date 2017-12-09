@@ -3,7 +3,6 @@ letter2.jpg
 letter3.jpg
 letter4.jpg
 letter5.jpg
-letter6.jpg
 letter7.jpg
 letter8.jpg
 letter9.jpg
@@ -14,9 +13,3 @@ letter13.jpg
 letter14.jpg
 letter15.jpg
 letter16.jpg
-letter17.jpg
-letter18.jpg
-letter19.jpg
-letter20.jpg
-letter21.jpg
-letter22.jpg
