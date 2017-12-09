@@ -10,7 +10,7 @@ from TrainDataLoader import *
 
 restore_path = "run1/alexnet_bn-125000"
 # Dataset Parameters
-batch_size = 10
+batch_size = 1
 load_size = 256 
 fine_size = 224
 c = 1
