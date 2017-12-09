@@ -10,7 +10,7 @@ from TrainDataLoader import *
 
 restore_path = "run1/alexnet_bn-125000"
 # Dataset Parameters
-batch_size = 1
+batch_size = 10
 load_size = 256 
 fine_size = 224
 c = 1
@@ -120,8 +120,8 @@ opt_data_val = {
 '''
 opt_data_test = {
     #'data_h5': 'miniplaces_256_val.h5',
-    'data_root': '.', #'../letters',   # MODIFY PATH ACCORDINGLY
-    'data_list': 'validation.txt', #'./test_data.txt',   # MODIFY PATH ACCORDINGLY
+    'data_root': '../letters',   # MODIFY PATH ACCORDINGLY
+    'data_list': './test_data.txt',   # MODIFY PATH ACCORDINGLY
     'load_size': load_size,
     'fine_size': fine_size,
     'data_mean': data_mean,

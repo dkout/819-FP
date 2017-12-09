@@ -20,7 +20,7 @@ class DataLoaderDisk(object):
         self.name_list = []
         with open(kwargs['data_list'], 'r') as f:
             for line in f:
-                path =line.split(' ')#[:-1]
+                path =line[:-1]
                 self.list_im.append(os.path.join(self.data_root, path))
                 self.name_list.append(path)
         self.list_im = np.array(self.list_im, np.object)
@@ -50,7 +50,7 @@ class DataLoaderDisk(object):
             else:
                 offset_h = (self.load_size-self.fine_size)//2
                 offset_w = (self.load_size-self.fine_size)//2
-            scipy.misc.imsave(str(i)+'.jpg', image[offset_h:offset_h+self.fine_size, offset_w:offset_w+self.fine_size])
+            scipy.misc.imssave(str(i)+'.jpg', image[offset_h:offset_h+self.fine_size, offset_w:offset_w+self.fine_size])
             images_batch[i, ...] =  image[offset_h:offset_h+self.fine_size, offset_w:offset_w+self.fine_size]
 #            print(self.list_im[self._idx])
 
