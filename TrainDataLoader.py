@@ -32,7 +32,7 @@ class DataLoaderDisk(object):
         self._idx = 0
         
     def next_batch(self, batch_size):
-        images_batch = np.zeros((batch_size, self.fine_size, self.fine_size, 3)) 
+        images_batch = np.zeros((batch_size, self.fine_size, self.fine_size)) 
         name_batch = np.array(batch_size) 
 
 	# labels_batch = np.zeros(batch_size)
