@@ -12,7 +12,7 @@ restore_path = "run1/alexnet_bn-125000"
 # Dataset Parameters
 batch_size = 1
 load_size = 256 
-fine_size = 224
+fine_size = 256
 c = 1
 data_mean = np.asarray([1])
 
