@@ -1,8 +1,8 @@
 import os
-f = open('data.txt','w')
+f = open('data_reduced.txt','w')
 print("open file")
 print("start walking")
-folders = os.walk('../Data/Fnt/')
+folders = os.walk('../Data_reduced/Fnt/')
 print("end walking")
 
 for folder in folders:
