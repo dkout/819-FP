@@ -23966,7 +23966,6 @@
 ../Data_reduced/Fnt/Sample030/img030-01014.png 30
 ../Data_reduced/Fnt/Sample030/img030-01015.png 30
 ../Data_reduced/Fnt/Sample030/img030-01016.png 30
-../Data_reduced/Fnt/Sample031/desktop.ini 31
 ../Data_reduced/Fnt/Sample031/img031-00001.png 31
 ../Data_reduced/Fnt/Sample031/img031-00002.png 31
 ../Data_reduced/Fnt/Sample031/img031-00003.png 31

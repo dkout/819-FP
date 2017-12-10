@@ -138,6 +138,38 @@ class DataLoaderDisk(object):
     def next_batch(self, batch_size):
         images_batch = np.zeros((batch_size, self.fine_size, self.fine_size)) 
         labels_batch = np.zeros(batch_size)
+
+        seq = iaa.Sequential([
+            //iaa.Fliplr(0.5), # horizontal flips
+            iaa.Sometimes(0.8, iaa.Crop(percent=(0.02, 0.1))), # random crops
+            # Small gaussian blur with random sigma between 0 and 0.5.
+            # But we only blur about 50% of all images.
+            iaa.Sometimes(0.25,
+                iaa.GaussianBlur(sigma=(0, 0.5))
+            ),
+            # Strengthen or weaken the contrast in each image.
+            iaa.Sometimes(0.3, iaa.ContrastNormalization((0.75, 1.5))),
+            # Add gaussian noise.
+            # For 50% of all images, we sample the noise once per pixel.
+            # For the other 50% of all images, we sample the noise per pixel AND
+            # channel. This can change the color (not only brightness) of the
+            # pixels.
+            iaa.Sometimes(0.4, iaa.AdditiveGaussianNoise(loc=0, scale=(0.0, 0.05*255), per_channel=0.5)),
+            # Make some images brighter and some darker.
+            # In 20% of all cases, we sample the multiplier once per channel,
+            # which can end up changing the color of the images.
+            iaa.Sometimes(0.1, iaa.Multiply((0.8, 1.2), per_channel=0.2)),
+            # Apply affine transformations to each image.
+            # Scale/zoom them, translate/move them, rotate them and shear them.
+            iaa.Sometimes(0.3,
+                iaa.Affine(
+                scale={"x": (0.8, 1.2), "y": (0.8, 1.2)},
+                translate_percent={"x": (-0.2, 0.2), "y": (-0.2, 0.2)},
+                rotate=(-25, 25),
+                shear=(-8, 8)
+            ))
+        ], random_order=True) # apply augmenters in random order
+
         for i in range(batch_size):
             image = scipy.misc.imread(self.list_im[self._idx])
             image = scipy.misc.imresize(image, (self.load_size, self.load_size))
@@ -147,9 +179,9 @@ class DataLoaderDisk(object):
             #scipy.misc.imshow(image)
             image = image - self.data_mean
             if self.randomize:
-                flip = np.random.random_integers(0, 1)
-                if flip>0:
-                    image = image[::-1]
+                #flip = np.random.random_integers(0, 1)
+                #if flip>0:
+                #    image = image[::-1]                
                 offset_h = np.random.random_integers(0, self.load_size-self.fine_size)
                 offset_w = np.random.random_integers(0, self.load_size-self.fine_size)
             else:
@@ -163,7 +195,9 @@ class DataLoaderDisk(object):
             self._idx += 1
             if self._idx == self.num:
                 self._idx = 0
-        
+        if self.randomize:
+            image = seq.augment_images(images_batch)
+
         return images_batch, labels_batch
     
     def size(self):

@@ -8,8 +8,8 @@ from DataLoaderAug import *
 
 # Dataset Parameters
 
-batch_size = 100
-load_size = 256
+batch_size = 128
+load_size = 248
 fine_size = 224
 c = 1
 data_mean = np.asarray([1])#0.45834960097,0.44674252445,])#0.41352266842])
@@ -99,7 +99,7 @@ def alexnet(x, keep_dropout, train_phase):
 opt_data_train = {
     #'data_h5': 'miniplaces_256_train.h5',
     'data_root': '.',   # MODIFY PATH ACCORDINGLY
-    'data_list': 'train.txt', # MODIFY PATH ACCORDINGLY
+    'data_list': 'train_reduced.txt', # MODIFY PATH ACCORDINGLY
     'load_size': load_size,
     'fine_size': fine_size,
     'data_mean': data_mean,
@@ -108,7 +108,7 @@ opt_data_train = {
 opt_data_val = {
     #'data_h5': 'miniplaces_256_val.h5',
     'data_root': '.',   # MODIFY PATH ACCORDINGLY
-    'data_list': 'validation.txt',   # MODIFY PATH ACCORDINGLY
+    'data_list': 'validation_reduced.txt',   # MODIFY PATH ACCORDINGLY
     'load_size': load_size,
     'fine_size': fine_size,
     'data_mean': data_mean,
