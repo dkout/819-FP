@@ -10,10 +10,11 @@ np.set_printoptions(threshold=np.nan)
 
 txtfile = open('output_images.txt', 'w')
 dirname = '../output_images'
-os.mkdir(dirname)
+
+#os.mkdir(dirname)
 
 letter_count=0
-input_file_name = 'for_slides.jpg'
+input_file_name = '../test.PNG'
 input_image = cv2.imread(input_file_name, 0)
 image_copy = cv2.imread(input_file_name, 0)
 input_image[input_image<128]=0#Black
@@ -38,7 +39,8 @@ from TrainDataLoader import *
 
 #Restore parameters
 
-restore_path = "run1/alexnet_bn-125000"
+restore_path = "run2/alexnet_bn-15000"
+print(restore_path)
 # Dataset Parameters
 batch_size = 1
 load_size = 224 
@@ -98,7 +100,7 @@ for line in lines_list:
         if i!=0:
             prev_letter=letters_list[i-1]
             space_between=letter[0]-prev_letter[2]
-            if space_between>0.5*max_width:
+            if space_between>0.4*max_width:
                 print("space")
                 letter_sequence.append("space")
         width=letter[2]-letter[0]+4
@@ -111,25 +113,25 @@ for line in lines_list:
         elif height<width:
             padding=255*np.ones((diff,width))
             letter_image=np.concatenate((padding,letter_image,padding),axis=0)
-        if (input_image[letter[1]:letter[3],letter[0]:letter[2]].max()==0) and abs(letter[2]+letter[1]-letter[3]-letter[0])<5:
-            print("period")
-            letter_sequence.append("period")
+        if (np.average(input_image[letter[1]:letter[3],letter[0]:letter[2]])<.15*255) and .65< abs(letter[2]-letter[0])/abs(letter[3]-letter[1]) <1.2 :
+           print("period")
+           letter_sequence.append("period")
         else:   
             print("letter")
             letter_sequence.append("letter")
-        letter_count+=1
-        name="letter"+str(letter_count)+".jpg"
-        savename = os.path.join(dirname, name)
-        cv2.imwrite( savename, letter_image);
-        txtfile.write(savename + '\n')
-        #cv2.imshow('image',letter_image);
-        #cv2.waitKey(0)
+            letter_count+=1
+            name="letter"+str(letter_count)+".jpg"
+            savename = os.path.join(dirname, name)
+            cv2.imwrite( savename, letter_image);
+            txtfile.write(savename + '\n')
+            #cv2.imshow('image',letter_image);
+            #cv2.waitKey(0)
 
 txtfile.close()
 
 cv2.imwrite( "full_image.jpg", image_copy);
-#cv2.imshow('image_copy',image_copy);
-#cv2.waitKey(0)
+cv2.imshow('image_copy',image_copy);
+cv2.waitKey(0)
 
 
 # Training Parameters
@@ -249,7 +251,7 @@ probabilities = tf.nn.softmax(logits)
 #writer = tf.train.SummaryWriter('.', graph=tf.get_default_graph())
 
 # Launch the graph
-
+lettercode_sequence = []
 with tf.Session() as sess:
     # Initialization
     saver=tf.train.Saver()
@@ -282,16 +284,16 @@ outputfile = open("Output_text.txt",'w')
 counter = 0
 
 for item in letter_sequence:
-    if item = "letter":
+    if item == "letter":
         lettercode = lettercode_sequence[counter]
         letter = letter_dict[lettercode]
         outputfile.write(letter)
         counter += 1
-    if item = "space":
+    if item == "space":
         outputfile.write(" ")
-    if item = "line":
+    if item == "line":
         outputfile.write("\n")
-    if item = "period":
+    if item == "period":
         outputfile.write(".")
             
 outputfile.close()

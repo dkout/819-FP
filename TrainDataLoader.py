@@ -50,7 +50,7 @@ class DataLoaderDisk(object):
             else:
                 offset_h = (self.load_size-self.fine_size)//2
                 offset_w = (self.load_size-self.fine_size)//2
-            scipy.misc.imsave(str(i)+'.jpg', image[offset_h:offset_h+self.fine_size, offset_w:offset_w+self.fine_size])
+            #scipy.misc.imsave(str(i)+'.jpg', image[offset_h:offset_h+self.fine_size, offset_w:offset_w+self.fine_size])
             images_batch[i, ...] =  image[offset_h:offset_h+self.fine_size, offset_w:offset_w+self.fine_size]
 #            print(self.list_im[self._idx])
 
