@@ -9,7 +9,7 @@ from DataLoaderAug import *
 # Dataset Parameters
 
 batch_size = 128
-load_size = 248
+load_size = 230
 fine_size = 224
 c = 1
 data_mean = np.asarray([1])#0.45834960097,0.44674252445,])#0.41352266842])
