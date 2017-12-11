@@ -141,7 +141,7 @@ class DataLoaderDisk(object):
 
         seq = iaa.Sequential([
             #iaa.Fliplr(0.5), # horizontal flips
-            iaa.Sometimes(0.8, iaa.Crop(percent=(0.02, 0.1))), # random crops
+            iaa.Sometimes(0.85, iaa.Crop(percent=(0.05, 0.1))), # random crops
             # Small gaussian blur with random sigma between 0 and 0.5.
             # But we only blur about 50% of all images.
             iaa.Sometimes(0.25,
@@ -161,12 +161,12 @@ class DataLoaderDisk(object):
             iaa.Sometimes(0.1, iaa.Multiply((0.8, 1.2), per_channel=0.2)),
             # Apply affine transformations to each image.
             # Scale/zoom them, translate/move them, rotate them and shear them.
-            iaa.Sometimes(0.3,
+            iaa.Sometimes(0.5,
                 iaa.Affine(
                 scale={"x": (0.8, 1.2), "y": (0.8, 1.2)},
-                translate_percent={"x": (-0.2, 0.2), "y": (-0.2, 0.2)},
-                rotate=(-25, 25),
-                shear=(-8, 8)
+                translate_percent={"x": (-0.25, 0.25), "y": (-0.25, 0.25)},
+                rotate=(-10, 10),
+                shear=(-2, 2)
             ))
         ], random_order=True) # apply augmenters in random order
 
