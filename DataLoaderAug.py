@@ -140,7 +140,7 @@ class DataLoaderDisk(object):
         labels_batch = np.zeros(batch_size)
 
         seq = iaa.Sequential([
-            //iaa.Fliplr(0.5), # horizontal flips
+            #iaa.Fliplr(0.5), # horizontal flips
             iaa.Sometimes(0.8, iaa.Crop(percent=(0.02, 0.1))), # random crops
             # Small gaussian blur with random sigma between 0 and 0.5.
             # But we only blur about 50% of all images.
