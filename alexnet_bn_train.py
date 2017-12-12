@@ -99,7 +99,7 @@ def alexnet(x, keep_dropout, train_phase):
 opt_data_train = {
     #'data_h5': 'miniplaces_256_train.h5',
     'data_root': '.',   # MODIFY PATH ACCORDINGLY
-    'data_list': 'train_reduced.txt', # MODIFY PATH ACCORDINGLY
+    'data_list': 'data_reduced.txt', # MODIFY PATH ACCORDINGLY
     'load_size': load_size,
     'fine_size': fine_size,
     'data_mean': data_mean,
