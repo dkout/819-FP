@@ -9,14 +9,14 @@ from DataLoaderAug import *
 # Dataset Parameters
 
 batch_size = 128
-load_size = 230
+load_size = 234
 fine_size = 224
 c = 1
 data_mean = np.asarray([1])#0.45834960097,0.44674252445,])#0.41352266842])
 
 # Training Parameters
-learning_rate = 0.0005
-dropout = 0.6 # Dropout, probability to keep units
+learning_rate = 0.0001
+dropout = 0.5 # Dropout, probability to keep units
 training_iters = 50000
 step_display = 50
 step_save = 5000

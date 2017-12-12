@@ -39,7 +39,7 @@ from TrainDataLoader import *
 
 #Restore parameters
 
-restore_path = "run2/alexnet_bn-15000"
+restore_path = "run3/alexnet_bn-60000"
 print(restore_path)
 # Dataset Parameters
 batch_size = 1
@@ -113,7 +113,7 @@ for line in lines_list:
         elif height<width:
             padding=255*np.ones((diff,width))
             letter_image=np.concatenate((padding,letter_image,padding),axis=0)
-        if (np.average(input_image[letter[1]:letter[3],letter[0]:letter[2]])<.15*255) and .65< abs(letter[2]-letter[0])/abs(letter[3]-letter[1]) <1.2 :
+        if (np.average(input_image[letter[1]:letter[3],letter[0]:letter[2]])<.18*255) and .6< abs(letter[2]-letter[0])/abs(letter[3]-letter[1]) <1.3 :
            print("period")
            letter_sequence.append("period")
         else:   

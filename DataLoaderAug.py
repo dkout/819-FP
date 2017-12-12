@@ -69,18 +69,18 @@ class DataLoaderH5(object):
         for i in range(batch_size):
             image = images_aug[self._idx]
             image = image.astype(np.float32)/255. - self.data_mean
-            # if self.randomize:
+            if self.randomize:
                 # flip = np.random.random_integers(0, 1)
             #     if flip>0:
             #         image = image[:,::-1,:]
-            #     offset_h = np.random.random_integers(0, self.load_size-self.fine_size)
-            #     offset_w = np.random.random_integers(0, self.load_size-self.fine_size)
-            # else:
-            #     offset_h = (self.load_size-self.fine_size)//2
-            #     offset_w = (self.load_size-self.fine_size)//2
+                offset_h = np.random.random_integers(0, self.load_size-self.fine_size)
+                offset_w = np.random.random_integers(0, self.load_size-self.fine_size)
+            else:
+                offset_h = (self.load_size-self.fine_size)//2
+                offset_w = (self.load_size-self.fine_size)//2
             
-            offset_h = (self.load_size-self.fine_size)//2
-            offset_w = (self.load_size-self.fine_size)//2
+            # offset_h = (self.load_size-self.fine_size)//2
+            # offset_w = (self.load_size-self.fine_size)//2
 
             images_batch[i, ...] = image[offset_h:offset_h+self.fine_size, offset_w:offset_w+self.fine_size, :]
             labels_batch[i, ...] = self.lab_set[self._idx]
@@ -141,10 +141,10 @@ class DataLoaderDisk(object):
 
         seq = iaa.Sequential([
             #iaa.Fliplr(0.5), # horizontal flips
-            iaa.Sometimes(0.85, iaa.Crop(percent=(0.05, 0.1))), # random crops
+            iaa.Sometimes(0.6, iaa.Crop(percent=(0, 0.1))), # random crops
             # Small gaussian blur with random sigma between 0 and 0.5.
             # But we only blur about 50% of all images.
-            iaa.Sometimes(0.25,
+            iaa.Sometimes(0.2,
                 iaa.GaussianBlur(sigma=(0, 0.5))
             ),
             # Strengthen or weaken the contrast in each image.
@@ -154,19 +154,18 @@ class DataLoaderDisk(object):
             # For the other 50% of all images, we sample the noise per pixel AND
             # channel. This can change the color (not only brightness) of the
             # pixels.
-            iaa.Sometimes(0.4, iaa.AdditiveGaussianNoise(loc=0, scale=(0.0, 0.05*255), per_channel=0.5)),
+            iaa.Sometimes(0.3, iaa.AdditiveGaussianNoise(loc=0, scale=(0.0, 0.05*255), per_channel=0.5)),
             # Make some images brighter and some darker.
             # In 20% of all cases, we sample the multiplier once per channel,
             # which can end up changing the color of the images.
-            iaa.Sometimes(0.1, iaa.Multiply((0.8, 1.2), per_channel=0.2)),
+            iaa.Sometimes(0.2, iaa.Multiply((0.8, 1.2), per_channel=0.2)),
             # Apply affine transformations to each image.
             # Scale/zoom them, translate/move them, rotate them and shear them.
-            iaa.Sometimes(0.5,
+            iaa.Sometimes(0.8,
                 iaa.Affine(
-                scale={"x": (0.8, 1.2), "y": (0.8, 1.2)},
-                translate_percent={"x": (-0.25, 0.25), "y": (-0.25, 0.25)},
-                rotate=(-10, 10),
-                shear=(-2, 2)
+                scale={"x": (0.7, 1.2), "y": (0.7, 1.2)},
+                translate_percent={"x": (-0.1, 0.1), "y": (-0.2, 0.2)},
+                rotate=(-5, 5)
             ))
         ], random_order=True) # apply augmenters in random order
 
