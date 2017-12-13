@@ -1,0 +1,32 @@
+Accuracy of Calibri1: 88.92733564013841%
+Case insencitive accuracy of Calibri1: 96.53979238754326%
+Accuracy of TNR1: 83.04498269896193%
+Case insencitive accuracy of TNR1: 86.85121107266436%
+Accuracy of Candara1: 77.85467128027682%
+Case insencitive accuracy of Candara1: 86.50519031141869%
+Accuracy of Calibri2: 91.6955017301038%
+Case insencitive accuracy of Calibri2: 98.6159169550173%
+Accuracy of TNR2: 82.35294117647058%
+Case insencitive accuracy of TNR2: 87.5432525951557%
+Accuracy of Candara2: 78.54671280276817%
+Case insencitive accuracy of Candara2: 86.85121107266436%
+Accuracy of Calibri3: 94.80968858131487%
+Case insencitive accuracy of Calibri3: 98.26989619377161%
+Accuracy of TNR3: 80.62283737024222%
+Case insencitive accuracy of TNR3: 86.85121107266436%
+Accuracy of Candara3: 79.58477508650519%
+Case insencitive accuracy of Candara3: 87.19723183391004%
+Accuracy of Calibri4: 95.50173010380622%
+Case insencitive accuracy of Calibri4: 98.96193771626297%
+Accuracy of TNR4: 83.73702422145328%
+Case insencitive accuracy of TNR4: 88.58131487889274%
+Accuracy of Candara4: 80.62283737024222%
+Case insencitive accuracy of Candara4: 87.19723183391004%
+Total accuracy of first network: 83.27566320645906%
+Total case insensitive accuracy of first network: 89.96539792387543%
+Total accuracy of second network: 84.19838523644752%
+Total case insensitive accuracy of second network: 91.00346020761246%
+Total accuracy of third network: 85.00576701268743%
+Total case insensitive accuracy of third network: 90.77277970011534%
+Total accuracy of fourth network: 86.62053056516724%
+Total case insensitive accuracy of fourth network: 91.58016147635524%

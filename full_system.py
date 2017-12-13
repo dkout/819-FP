@@ -3,7 +3,7 @@ import numpy as np
 import cv2
 from scipy.ndimage import label
 import os
-
+import shutil
 
 
 np.set_printoptions(threshold=np.nan)
@@ -11,7 +11,7 @@ np.set_printoptions(threshold=np.nan)
 txtfile = open('output_images.txt', 'w')
 dirname = '../output_images'
 
-#os.mkdir(dirname)
+os.mkdir(dirname)
 
 letter_count=0
 input_file_name = '../test.PNG'
@@ -39,7 +39,7 @@ from TrainDataLoader import *
 
 #Restore parameters
 
-restore_path = "run3/alexnet_bn-60000"
+restore_path = "run4/alexnet_bn-35000"
 print(restore_path)
 # Dataset Parameters
 batch_size = 1
@@ -100,7 +100,7 @@ for line in lines_list:
         if i!=0:
             prev_letter=letters_list[i-1]
             space_between=letter[0]-prev_letter[2]
-            if space_between>0.4*max_width:
+            if space_between>0.38*max_width:
                 print("space")
                 letter_sequence.append("space")
         width=letter[2]-letter[0]+4
@@ -279,7 +279,7 @@ with tf.Session() as sess:
 
     sys.stdout.flush()
 
-
+shutil.rmtree(dirname)
 outputfile = open("Output_text.txt",'w')
 counter = 0
 
